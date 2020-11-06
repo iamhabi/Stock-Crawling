@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 import sise_day as sd
+import news
 
 code = "005930"
 siseURL = "https://finance.naver.com/item/sise.nhn?code="
@@ -14,6 +15,10 @@ def get_stock(code):
 
     print(title, rate)
 
+    print("Daily")
     sd.get_sise_day(code)
+
+    print("News")
+    news.get_news(code)
 
 get_stock(code)
