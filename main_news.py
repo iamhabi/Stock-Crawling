@@ -11,16 +11,23 @@ content = soup.find('div', {'class':'mainNewsList'}).find('ul', {'class':'newsLi
 
 li = content.find_all('li')
 
-news = []
+def get_mn():
+    news = []
 
-for i in range(len(li)):
-    if li[i].find('dt', {'class':'articleSubject'}):
-        news.append(li[i].find('a').text)
-    else:
-        news.append(li[i].find('dd').find('a').text)
+    for i in range(len(li)):
+        n = []
+        if li[i].find('dt', {'class':'articleSubject'}):
+            n.append(li[i].find('a').text)
+            n.append(li[i].find('a')['href'])
+        else:
+            n.append(li[i].find('dd').find('a').text)
+            n.append(li[i].find('dd').find('a')['href'])
 
-# print(pd.DataFrame(news))
+        news.append(n)
 
-with open('mainnews.txt', 'w') as f:
-    for i in range(len(news)):
-        f.write(news[i] + "\n")
+    # print(pd.DataFrame(news))
+
+    with open('stock.txt', 'w') as f:
+        for i in news:
+            f.write("%s\n" % i)
+        f.write("---------------\n")

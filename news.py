@@ -26,7 +26,6 @@ def get_news(code):
             else:
                 # print(tr[i].find('a').text)
                 n.append(tr[i].find('a').text)
-                n.append(tr[i].find('td', {'class':'info'}).text)
                 n.append(tr[i].find('td', {'class':'date'}).text)
                 n.append(tr[i].find('a').get('href'))
         else:
@@ -35,7 +34,6 @@ def get_news(code):
             else:
                 # print(tr[i].find('a').text)
                 n.append(tr[i].find('a').text)
-                n.append(tr[i].find('td', {'class':'info'}).text)
                 n.append(tr[i].find('td', {'class':'date'}).text)
                 n.append(tr[i].find('a').get('href'))
         
@@ -51,4 +49,5 @@ def get_news(code):
     with open('stock.txt', 'a') as f:
         f.write("뉴스\n")
         for i in news:
-            f.write("%s\n" % i)
+            if i:
+                f.write("%s\n" % i)

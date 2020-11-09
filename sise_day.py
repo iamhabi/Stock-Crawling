@@ -43,3 +43,4 @@ def get_sise_day(code):
         f.write("일별시세\n")
         for i in stock_day:
             f.write("%s\n" % i)
+        f.write("---------------\n")
