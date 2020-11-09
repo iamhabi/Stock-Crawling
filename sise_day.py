@@ -37,4 +37,9 @@ def get_sise_day(code):
         
         stock_day.append(day)
 
-    print(pd.DataFrame(stock_day, columns = cate))
+    # print(pd.DataFrame(stock_day, columns = cate))
+
+    with open('stock.txt', 'a') as f:
+        f.write("일별시세\n")
+        for i in stock_day:
+            f.write("%s\n" % i)

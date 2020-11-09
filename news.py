@@ -24,22 +24,31 @@ def get_news(code):
             elif a == "hide_news":
                 continue
             else:
-                print(tr[i].find('a').text)
+                # print(tr[i].find('a').text)
+                n.append(tr[i].find('a').text)
+                n.append(tr[i].find('td', {'class':'info'}).text)
+                n.append(tr[i].find('td', {'class':'date'}).text)
+                n.append(tr[i].find('a').get('href'))
         else:
             if flag == 1:
                 flag = 0
             else:
-                print(tr[i].find('a').text)
-        
-        print(flag)
+                # print(tr[i].find('a').text)
+                n.append(tr[i].find('a').text)
+                n.append(tr[i].find('td', {'class':'info'}).text)
+                n.append(tr[i].find('td', {'class':'date'}).text)
+                n.append(tr[i].find('a').get('href'))
         
         # n.append(tr[i].find('a').text)
         # n.append(tr[i].find('td', {'class':'info'}).text)
         # n.append(tr[i].find('td', {'class':'date'}).text)
         # n.append(tr[i].find('a').get('href'))
 
-    #     news.append(n)
+        news.append(n)
 
     # print(pd.DataFrame(news))
 
-get_news("000660")
+    with open('stock.txt', 'a') as f:
+        f.write("뉴스\n")
+        for i in news:
+            f.write("%s\n" % i)

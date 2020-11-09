@@ -13,12 +13,10 @@ def get_stock(code):
     title = soup.find('div', {'class':'wrap_company'}).find('h2').text
     rate = soup.find('div', {'class':'rate_info'}).find('span', {'class':'blind'}).text
 
-    print(title, rate)
+    with open('stock.txt', 'w') as f:
+        f.write(title + " " + rate + "\n")
 
-    print("Daily")
     sd.get_sise_day(code)
-
-    print("News")
     news.get_news(code)
 
 get_stock(code)
