@@ -51,3 +51,4 @@ def get_news(code):
         for i in news:
             if i:
                 f.write("%s\n" % i)
+        f.write("-----------------------------\n")

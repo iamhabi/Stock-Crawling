@@ -30,4 +30,4 @@ def get_mn():
     with open('stock.txt', 'w') as f:
         for i in news:
             f.write("%s\n" % i)
-        f.write("---------------\n")
+        f.write("-----------------------------\n")

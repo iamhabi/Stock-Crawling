@@ -31,7 +31,7 @@ def get_sise_day(code):
         for j in range(len(td)):
             if j == 2:
                 day.append(td[j].text.strip())
-                day.append(td[j].find('img')['alt'])
+                # day.append(td[j].find('img')['alt'])
             else:
                 day.append(td[j].text)
         

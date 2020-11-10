@@ -5,7 +5,7 @@ import sise_day as sd
 import news
 import main_news as mn
 
-code = "005930"
+codes = ["005930", "000660", "030200", "001040", "051910", "006400", "035720", "035420", "005380", "000150"]
 siseURL = "https://finance.naver.com/item/sise.nhn?code="
 
 def get_stock(code):
@@ -14,13 +14,15 @@ def get_stock(code):
     title = soup.find('div', {'class':'wrap_company'}).find('h2').text
     rate = soup.find('div', {'class':'rate_info'}).find('span', {'class':'blind'}).text
 
-    mn.get_mn()
 
     with open('stock.txt', 'a') as f:
-        f.write(title + " " + rate + "\n")
+        f.write(title + "|" + code + " " + rate + "\n")
         f.write("---------------\n")
 
     sd.get_sise_day(code)
     news.get_news(code)
 
-get_stock(code)
+mn.get_mn()
+
+for code in codes:
+    get_stock(code)
