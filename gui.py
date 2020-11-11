@@ -1,21 +1,20 @@
-import sys
-from PyQt5.QtWidgets import QApplication, QWidget
+from tkinter import *
+import main
+
+# codes = ["005930", "000660", "030200", "001040", "051910", "006400", "035720", "035420", "005380", "000150"]
+
+root = Tk()
+root.title('Stock')
+root.geometry('800x700')
+
+def showStock(code):
+    stock = Label(root, text = main.codes[code])
+    stock.place(x = 0, y = 50)
+    main.get_stock(main.codes[code])
+
+for i in range(len(main.codes)):
+    button = Button(root, text = main.codes[i], overrelief = 'solid', command = lambda j = i:showStock(j))
+    button.grid(row = 1, column = i)
 
 
-class MyApp(QWidget):
-
-    def __init__(self):
-        super().__init__()
-        self.initUI()
-
-    def initUI(self):
-        self.setWindowTitle('My First Application')
-        self.move(300, 300)
-        self.resize(400, 200)
-        self.show()
-
-
-if __name__ == '__main__':
-   app = QApplication(sys.argv)
-   ex = MyApp()
-   sys.exit(app.exec_())
+root.mainloop()
