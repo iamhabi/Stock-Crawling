@@ -15,7 +15,7 @@ def get_news(code):
     flag = 0
 
     for i in range(len(tr)):
-        n = []
+        n = {} 
 
         if tr[i].get('class'):
             a = tr[i].get('class')[0]
@@ -24,31 +24,31 @@ def get_news(code):
             elif a == "hide_news":
                 continue
             else:
-                # print(tr[i].find('a').text)
-                n.append(tr[i].find('a').text)
-                n.append(tr[i].find('td', {'class':'date'}).text)
-                n.append(tr[i].find('a').get('href'))
+                # n.append(tr[i].find('a').text)
+                # n.append(tr[i].find('td', {'class':'date'}).text)
+                # n.append(tr[i].find('a').get('href'))
+                n['title'] = tr[i].find('a').text
+                n['date'] = tr[i].find('td', {'class':'date'}).text
+                n['url'] = tr[i].find('a').get('href')
         else:
             if flag == 1:
                 flag = 0
             else:
-                # print(tr[i].find('a').text)
-                n.append(tr[i].find('a').text)
-                n.append(tr[i].find('td', {'class':'date'}).text)
-                n.append(tr[i].find('a').get('href'))
+                # n.append(tr[i].find('a').text)
+                # n.append(tr[i].find('td', {'class':'date'}).text)
+                # n.append(tr[i].find('a').get('href'))
+                n['title'] = tr[i].find('a').text
+                n['date'] = tr[i].find('td', {'class':'date'}).text
+                n['url'] = tr[i].find('a').get('href')
         
-        # n.append(tr[i].find('a').text)
-        # n.append(tr[i].find('td', {'class':'info'}).text)
-        # n.append(tr[i].find('td', {'class':'date'}).text)
-        # n.append(tr[i].find('a').get('href'))
+        if n.get('title'):
+            news.append(n)
 
-        news.append(n)
+    return news
 
-    # print(pd.DataFrame(news))
-
-    with open('stock.txt', 'a') as f:
-        f.write("뉴스\n")
-        for i in news:
-            if i:
-                f.write("%s\n" % i)
-        f.write("-----------------------------\n")
+    # with open('stock.txt', 'a') as f:
+    #     f.write("뉴스\n")
+    #     for i in news:
+    #         if i:
+    #             f.write("%s\n" % i)
+    #     f.write("-----------------------------\n")
