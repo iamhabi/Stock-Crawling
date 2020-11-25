@@ -6,7 +6,7 @@ import sise_day as sd
 import news
 import main_news as mn
 
-codes = ["005930", "000660", "030200", "001040", "051910", "006400", "035720", "035420", "005380", "000150"]
+codes = ["005930", "000660", "051910", "006400", "035720", "035420", "005380", "066570", "034220"]
 siseURL = "https://finance.naver.com/item/sise.nhn?code="
 
 stocks = []
