@@ -8,23 +8,6 @@ import main_news as mn
 codes = ["005930", "000660", "030200", "001040", "051910", "006400", "035720", "035420", "005380", "000150"]
 siseURL = "https://finance.naver.com/item/sise.nhn?code="
 
-def get(code):
-    result = requests.get(siseURL + code)
-    soup = BeautifulSoup(result.text, 'html.parser')
-    title = soup.find('div', {'class':'wrap_company'}).find('h2').text
-    rate = soup.find('div', {'class':'rate_info'}).find('span', {'class':'blind'}).text
-
-    stock = []
-
-    stock.append(title)
-    stock.append(rate)
-
-    stock.append(sd.get_sd(code))
-    stock.append(news.get_n(code))
-
-    return stock
-
-
 def get_stock(code):
     result = requests.get(siseURL + code)
     soup = BeautifulSoup(result.text, 'html.parser')

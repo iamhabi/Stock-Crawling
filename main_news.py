@@ -25,7 +25,6 @@ def get_mn():
 
         news.append(n)
 
-    # print(pd.DataFrame(news))
 
     with open('stock.txt', 'w') as f:
         for i in news:
