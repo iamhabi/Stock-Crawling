@@ -43,5 +43,5 @@ def get_mn():
     #         f.write("%s\n" % i)
     #     f.write("-----------------------------\n")
 
-    with open('stock.json', 'w', encoding='utf-8') as f:
+    with open('stock.json', 'w', encoding = 'utf-8') as f:
         json.dump(json_data, f, indent = 4, ensure_ascii = False)

@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import sise_day as sd
 import news
 import main_news as mn
+import stock_market as sm
 
 codes = ["005930", "000660", "051910", "006400", "035720", "035420", "005380", "066570", "034220"]
 siseURL = "https://finance.naver.com/item/sise.nhn?code="
@@ -41,6 +42,8 @@ with open('stock.json', 'w') as f:
     json.dump(data, f, indent = 4)
 
 mn.get_mn()
+
+sm.get_stock_market()
 
 for code in codes:
     get_stock(code)
