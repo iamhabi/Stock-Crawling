@@ -17,7 +17,7 @@ def get_mn():
 
     json_data = {}
 
-    with open('test.json', 'r') as f:
+    with open('stock.json', 'r') as f:
         json_data = json.load(f)
 
     json_data['mainnews'] = []
