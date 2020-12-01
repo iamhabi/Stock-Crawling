@@ -6,6 +6,7 @@ import sise_day as sd
 import news
 import main_news as mn
 import stock_market as sm
+import exchange_rate as er
 
 codes = ["005930", "000660", "051910", "006400", "035720", "035420", "005380", "066570", "034220"]
 siseURL = "https://finance.naver.com/item/sise.nhn?code="
@@ -41,10 +42,16 @@ data['name'] = "Stock"
 with open('stock.json', 'w') as f:
     json.dump(data, f, indent = 4)
 
+# main news
 mn.get_mn()
 
+# Stock Market ex) KOSPI, NASDAQ
 sm.get_stock_market()
 
+# Exchange Rate ex) USDKRW, EURKRW
+er.get_er()
+
+# Stock
 for code in codes:
     get_stock(code)
 
