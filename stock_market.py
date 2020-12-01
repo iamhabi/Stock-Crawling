@@ -80,7 +80,7 @@ def get_world_stock_market(code):
     soup = BeautifulSoup(result.text, 'html.parser')
     
     title = soup.find('div', {'class':'h_area'}).find('h2').text
-    rate = soup.find('div', {'class':'rate_info'}).find('em', {'class':'no_up'}).text.strip()
+    rate = soup.find('div', {'class':'rate_info'}).find('em').text.strip()
 
     m = {}
     m['title'] = title
