@@ -7,6 +7,7 @@ import news
 import main_news as mn
 import stock_market as sm
 import exchange_rate as er
+import gold
 
 codes = ["005930", "000660", "051910", "006400", "035720", "035420", "005380", "066570", "034220"]
 siseURL = "https://finance.naver.com/item/sise.nhn?code="
@@ -37,8 +38,6 @@ def get_stock(code):
 
 data = {}
 
-data['name'] = "Stock" 
-
 with open('stock.json', 'w') as f:
     json.dump(data, f, indent = 4)
 
@@ -50,6 +49,9 @@ sm.get_stock_market()
 
 # Exchange Rate ex) USDKRW, EURKRW
 er.get_er()
+
+# Gold
+gold.get_gold()
 
 # Stock
 for code in codes:
