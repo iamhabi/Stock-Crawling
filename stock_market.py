@@ -10,6 +10,8 @@ siURL = 'https://finance.naver.com/sise/sise_index.nhn?code='
 sidURL = 'https://finance.naver.com/sise/sise_index_day.nhn?code='
 worldURL = 'https://finance.naver.com/world/sise.nhn?symbol='
 
+head = ['날짜', '종가', '전일비', '시가', '고가', '저가']
+
 def get_stock_market():
     json_data = {}
 
@@ -31,8 +33,8 @@ def get_k_stock_market(code):
     result = requests.get(siURL + code)
     soup = BeautifulSoup(result.text, 'html.parser')
 
-    title = soup.find('h3', {'class':'sub_tlt'}).text
-    rate = soup.find('em', {'id':'now_value'}).text
+    title = soup.select_one('h3.sub_tlt').text
+    rate = soup.select_one('em#now_value').text
 
     m = {}
     m['title'] = title
@@ -42,16 +44,7 @@ def get_k_stock_market(code):
     r2 = requests.get(sidURL + code)
     s2 = BeautifulSoup(r2.text, 'html.parser')
 
-    table = s2.find('table', {'class':'type_1'})
-
-    th = table.find_all('th')
-
-    head = []
-
-    for i in range(len(th)):
-        head.append(th[i].text)
-    
-    tr = table.find_all('tr')
+    tr = s2.select('table.type_1 > tr')
 
     sise_day = []
 
@@ -61,11 +54,9 @@ def get_k_stock_market(code):
         if i == 8:
             continue
         elif td[0].text:
-            # a = []
             a = {}
 
             for j in range(len(td)):
-                # a.append(td[j].text.strip())
                 a[head[j]] = td[j].text.strip()
 
             sise_day.append(a)
@@ -79,34 +70,24 @@ def get_world_stock_market(code):
     result = requests.get(worldURL + code)
     soup = BeautifulSoup(result.text, 'html.parser')
     
-    title = soup.find('div', {'class':'h_area'}).find('h2').text
-    rate = soup.find('div', {'class':'rate_info'}).find('em').text.strip()
+    title = soup.select_one('div.h_area > h2').text
+    rate = soup.select_one('div.rate_info > div.today > p > em').text.strip()
 
     m = {}
     m['title'] = title
     m['code'] = code
     m['rate'] = rate
 
-    table = soup.find('table', {'id':'dayTable'})
-
-    th = table.find('thead').find_all('th')
-
-    head = []
-
-    for i in range(len(th)):
-        head.append(th[i].find('span').text)
-    
-    tr = table.find('tbody').find_all('tr')
+    tr = soup.select('table#dayTable > tbody > tr')
 
     world_sise_day = []
 
     for i in range(len(tr)):
-        td = tr[i].find_all('td')
+        td = tr[i].select('td')
 
         a = {}
 
         for j in range(len(td)):
-            # a.append(td[j].text)
             a[head[j]] = td[j].text
         
         world_sise_day.append(a)

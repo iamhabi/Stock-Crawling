@@ -17,8 +17,9 @@ stocks = []
 def get_stock(code):
     result = requests.get(siseURL + code)
     soup = BeautifulSoup(result.text, 'html.parser')
-    title = soup.find('div', {'class':'wrap_company'}).find('h2').text
-    rate = soup.find('div', {'class':'rate_info'}).find('span', {'class':'blind'}).text
+
+    title = soup.select_one('div.wrap_company > h2').text
+    rate = soup.select_one('div.rate_info > div.today > p > em > span.blind').text
 
     # get stock quotations
     stock_day = sd.get_sise_day(code)

@@ -24,27 +24,25 @@ def get_er():
         json.dump(json_data, f, indent = 4, ensure_ascii = False)
 
 def get_exchange_rate(country):
-    er = {}
-
     result = requests.get(erURL + country)
     soup = BeautifulSoup(result.text, 'html.parser')
 
-    title = soup.find('h2').text.strip()
-    rate = soup.find('div', {'id':'content'}).find('p').find('em').text.strip()
+    title = soup.select_one('h2').text.strip()
+    rate = soup.select_one('div.today > p > em').text.strip()
 
+    er = {}
     er['title'] = title
     er['rate'] = rate
 
     r2 = requests.get(dailyURL + country)
     s2 = BeautifulSoup(r2.text, 'html.parser')
 
-    table = s2.find('table', {'class':'tbl_exchange'})
-    tr = table.find('tbody').find_all('tr')
+    tr = s2.select('table.tbl_exchange > tbody > tr')
 
     daily = []
 
     for i in range(len(tr)):
-        td = tr[i].find_all('td')
+        td = tr[i].select('td')
 
         a = {}
 

@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 
 sisedayURL = "https://finance.naver.com/item/sise_day.nhn?code="
-d = ['날짜', '종가', '전일비', '시가', '고가', '저가', '거래량']
+head = ['날짜', '종가', '전일비', '시가', '고가', '저가', '거래량']
 
 def get_sise_day(code):
     result = requests.get(sisedayURL + code)
@@ -12,22 +12,18 @@ def get_sise_day(code):
 
     stock_day = []
 
-    tr = table.find_all('tr', {'onmouseover':'mouseOver(this)'})
+    tr = table.select('tr')
 
-    for i in range(len(tr)):
+    for i in range(1, len(tr)):
         day = {}
         td = tr[i].find_all('td')
 
+        if not td[0].text:
+            continue
+
         for j in range(len(td)):
-            # day.append(td[j].text.strip())
-            day[d[j]] = td[j].text.strip()
+            day[head[j]] = td[j].text.strip()
         
         stock_day.append(day)
 
     return stock_day
-
-    # with open('stock.txt', 'a') as f:
-    #     f.write("일별시세\n")
-    #     for i in stock_day:
-    #         f.write("%s\n" % i)
-    #     f.write("---------------\n")

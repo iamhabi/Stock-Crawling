@@ -7,9 +7,8 @@ def get_news(code):
 
     result = requests.get(newsURL)
     soup = BeautifulSoup(result.text, 'html.parser')
-    table = soup.find('table', {'class':'type5'}).find('tbody')
 
-    tr = table.find_all('tr')
+    tr = soup.select('table.type5 > tbody > tr')
 
     news = []
     flag = 0
@@ -24,31 +23,18 @@ def get_news(code):
             elif a == "hide_news":
                 continue
             else:
-                # n.append(tr[i].find('a').text)
-                # n.append(tr[i].find('td', {'class':'date'}).text)
-                # n.append(tr[i].find('a').get('href'))
-                n['title'] = tr[i].find('a').text
-                n['date'] = tr[i].find('td', {'class':'date'}).text
-                n['url'] = tr[i].find('a').get('href')
+                n['title'] = tr[i].select_one('a').text
+                n['date'] = tr[i].select_one('td.date').text
+                n['url'] = tr[i].select_one('a')['href']
         else:
             if flag == 1:
                 flag = 0
             else:
-                # n.append(tr[i].find('a').text)
-                # n.append(tr[i].find('td', {'class':'date'}).text)
-                # n.append(tr[i].find('a').get('href'))
-                n['title'] = tr[i].find('a').text
-                n['date'] = tr[i].find('td', {'class':'date'}).text
-                n['url'] = tr[i].find('a').get('href')
+                n['title'] = tr[i].select_one('a').text
+                n['date'] = tr[i].select_one('td.date').text
+                n['url'] = tr[i].find('a')['href']
         
         if n.get('title'):
             news.append(n)
 
     return news
-
-    # with open('stock.txt', 'a') as f:
-    #     f.write("뉴스\n")
-    #     for i in news:
-    #         if i:
-    #             f.write("%s\n" % i)
-    #     f.write("-----------------------------\n")
