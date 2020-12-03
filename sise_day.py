@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
 
 sisedayURL = "https://finance.naver.com/item/sise_day.nhn?code="
 head = ['날짜', '종가', '전일비', '시가', '고가', '저가', '거래량']

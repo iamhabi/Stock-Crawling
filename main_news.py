@@ -1,7 +1,6 @@
 import json
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
 
 mainnewsURL = "https://finance.naver.com/news/mainnews.nhn"
 

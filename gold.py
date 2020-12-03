@@ -1,8 +1,6 @@
 import json
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
-import re
 
 goldURL = "https://finance.naver.com/marketindex/goldDetail.nhn"
 dailyURL = "https://finance.naver.com/marketindex/goldDailyQuote.nhn"

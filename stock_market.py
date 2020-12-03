@@ -1,7 +1,6 @@
 import json
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
 
 ko_sm = ['KOSPI', 'KOSDAQ']
 world_sm = ['NAS@IXIC', 'DJI@DJI', 'SPI@SPX']
