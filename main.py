@@ -25,7 +25,7 @@ def get_stock(code):
     stock_day = sd.get_sise_day(code)
 
     stock = {}
-    stock['name'] = title
+    stock['title'] = title
     stock['code'] = code
     stock['rate'] = rate
     stock['sd'] = stock_day
