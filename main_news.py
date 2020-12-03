@@ -9,8 +9,7 @@ result = requests.get(mainnewsURL)
 soup = BeautifulSoup(result.text, 'html.parser')
 
 content = soup.select_one('div.mainNewsList > ul.newsList')
-
-li = content.find_all('li')
+li = content.select('li')
 
 def get_mn():
     json_data = {}

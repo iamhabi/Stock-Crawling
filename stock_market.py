@@ -49,7 +49,7 @@ def get_k_stock_market(code):
     sise_day = []
 
     for i in range(1, len(tr)):
-        td = tr[i].find_all('td')
+        td = tr[i].select('td')
 
         if i == 8:
             continue

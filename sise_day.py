@@ -8,11 +8,10 @@ head = ['날짜', '종가', '전일비', '시가', '고가', '저가', '거래�
 def get_sise_day(code):
     result = requests.get(sisedayURL + code)
     soup = BeautifulSoup(result.text, 'html.parser')
-    table = soup.find('table', {'class':'type2'})
 
     stock_day = []
 
-    tr = table.select('tr')
+    tr = soup.select('table.type2 > tr')
 
     for i in range(1, len(tr)):
         day = {}
