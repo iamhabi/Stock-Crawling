@@ -46,25 +46,35 @@ def get_k_stock_market(code):
 
     tr = s2.select('table.type_1 > tr')
 
+    # print(tr)
+
     sise_day = []
 
-    for i in range(1, len(tr)):
+    for i in range(2, 5):
         td = tr[i].select('td')
 
-        if i == 8:
-            continue
-        elif td[0].text:
-            a = {}
+        a = {}
 
-            for j in range(len(td)):
-                a[head[j]] = td[j].text.strip()
+        for j in range(len(td)):
+            a[head[j]] = td[j].text.strip()
 
-            sise_day.append(a)
+        sise_day.append(a)
+
+    tr = tr[8].select('tr')[:3]
+
+    for i in range(len(tr)):
+        td = tr[i].select('td')
+
+        a = {}
+
+        for j in range(len(td)):
+            a[head[j]] = td[j].text.strip()
+
+        sise_day.append(a)
 
     m['sd'] = sise_day
 
     return m
-
 
 def get_world_stock_market(code):
     result = requests.get(worldURL + code)
