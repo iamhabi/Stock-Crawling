@@ -40,9 +40,9 @@ def get_news_naver(code):
     return news
 
 def get_news_yahoo(code):
-    yahooURL = "https://www.finviz.com/quote.ashx?t="
+    finvizURL = "https://www.finviz.com/quote.ashx?t="
 
-    req = Request(yahooURL + code, headers={'User-Agent':'Mozilla/5.0'})
+    req = Request(finvizURL + code, headers={'User-Agent':'Mozilla/5.0'})
     webpage = urlopen(req).read()
     soup = BeautifulSoup(webpage, 'html.parser')
 
